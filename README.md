@@ -5,7 +5,7 @@ gt7_udp_csv_parser is used to parse UDP packets and output a CSV. All other prog
 ## Quick Start
 
 1. Clone this repository `git clone https://github.com/macmanley/gt7-track-visualization.git`
-2. Use python to run the scripts. Sample track and session data is included in the "tracks" folder. Simply drag any  csvs you want visualized into the "data" folder, then run one of the visualization scripts.
+2. Use python to run the scripts. Sample track and session data is included in the "tracks" folder. Simply drag any CSVs you want visualized into the "data" folder, then run one of the visualization scripts.
 
 Example: `python .\speed_heatmap_visualization.py`
 
