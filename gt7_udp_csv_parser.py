@@ -6,9 +6,10 @@ import csv
 import time
 import ctypes
 
-# ports for send and receive data
+# ports for sending and receive data
 SendPort = 33739
 ReceivePort = 33740
+# ip address needed to send hb
 print("Enter PS4/PS5 IP Address:")
 ip = input()
 
@@ -67,7 +68,7 @@ class GT7Packet(ctypes.Structure):
 		("carCode", ctypes.c_int32),
 	]
 
-# data stream decoding
+# sals20 decoding
 def salsa20_decrypt(dat):
 	KEY = b'Simulator Interface Packet GT7 ver 0.0'
 	# Seed IV is always located here
@@ -85,13 +86,10 @@ def salsa20_decrypt(dat):
 		return bytearray(b'')
 	return ddata
 
-# send heartbeat
+# hb
 def send_hb(s):
 	send_data = 'A'
 	s.sendto(send_data.encode('utf-8'), (ip, SendPort))
-	#print('send heartbeat')
-
-# generic print function
 
 def secondsToLaptime(seconds):
 	remaining = seconds
@@ -102,8 +100,6 @@ def secondsToLaptime(seconds):
 def get_elapsed_time(start_time):
 	return time.time() - start_time
 
-
-# start by sending heartbeat
 send_hb(sock)
 
 filename = 'data.csv'
@@ -175,20 +171,6 @@ while True:
 			# print(gt7_packet.tyreTemp[3])
 
 			elapsed_time = get_elapsed_time(start_time)
-			
-			# data_row = {
-            #     'timeElapsed': elapsed_time,
-			# 	'isPaused': paused,
-			# 	'onTrack': onTrack,
-			# 	'carID': gt7_packet.carCode,
-            #     'throttle': gt7_packet.throttle,
-            #     'brake': gt7_packet.brake,
-			# 	'clutch': gt7_packet.clutch,
-			# 	'engineRPM': gt7_packet.engineRPM,
-			# 	'speedKMH': gt7_packet.speed,
-			# 	'bestLap': gt7_packet.bestLaptime,
-			# 	'totalLaps': gt7_packet.totalLaps
-            # }
 
 			data_row = [
                 elapsed_time,
