@@ -133,7 +133,7 @@ while True:
 
 			curGear = gt7_packet.gears & 0b00001111
 			suggestedGear = gt7_packet.gears >> 4
-			print(curGear)
+			# print(curGear)
 
 			noActiveFlags = 0 if gt7_packet.flags != 0 else 1
 			onTrack = 1 if gt7_packet.flags & 1 << 0 else 0
@@ -167,8 +167,6 @@ while True:
 				tyreSlipRatioFR = 0.0
 				tyreSlipRatioRL = 0.0
 				tyreSlipRatioRR = 0.0
-
-			# print(gt7_packet.tyreTemp[3])
 
 			elapsed_time = get_elapsed_time(start_time)
 
